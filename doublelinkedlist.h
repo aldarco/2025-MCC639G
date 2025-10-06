@@ -1,5 +1,5 @@
-#ifndef __LINKEDLIST_H__
-#define __LINKEDLIST_H__
+#ifndef __DOUBLELINKEDLIST_H__
+#define __DOUBLELINKEDLIST_H__
 #include <iostream>
 #include "types.h"
 #include "traits.h"
@@ -121,8 +121,9 @@ public:
     forward_iterator end()  { return forward_iterator(this, nullptr); } 
 
     // TODO: verifricar donde debe comenzar apuntando el iterator reverso
-    forward_iterator rbegin(){ return backward_iterator(this, m_pRoot); };
-    forward_iterator rend()  { return backward_iterator(this, nullptr); } 
+    // corregio backward iterator
+    backward_iterator rbegin(){ return backward_iterator(this, m_pRoot); };
+    backward_iterator rend()  { return backward_iterator(this, nullptr); } 
 
     friend std::ostream& operator<<(std::ostream &os, CDoubleLinkedList<Traits> &obj){
         auto pRoot = obj.GetRoot();
@@ -190,4 +191,4 @@ std::ostream &operator<<(std::ostream &os, CDoubleLinkedList<Traits> &obj){
 
 void DemoDoubleLinkedList();
 
-#endif // __LINKEDLIST_H__
+#endif // __DOUBLELINKEDLIST_H__

@@ -47,20 +47,16 @@ void DemoLinkedList(){
     l1.Write(cout);
     cout <<endl;
 
+    // constructor por cpoia
+    std::cout << endl << "constructor por copia" << std::endl;
+    std::cout << "l1 (original): ";
+    foreach(l1.begin(), l1.end(), ::Print<T1>);
+    CLinkedList< AscendingTrait<T1> > lcopy(l1);
+    std::cout <<endl << "l_copy (copy constructor from l1): ";
+    foreach(lcopy.begin(), lcopy.end(), ::Print<T1>);
+
     std::ofstream of("LL.txt");
     l1.Write(of);
     of.close();
 }
 
-void DemoDoubleLinkedList(){
-    std::vector< std::pair<T1, Ref> > v1 = {
-        {4, 8}, {2, 5}, {7, 3}, {1, 9}, {5, 2}
-    };
-    CDoubleLinkedList< AscendingTrait<T1> > l1;
-    for (auto &par : v1)
-        l1.Insert(par.first, par.second);
-    std::cout << l1 << std::endl;
-
-    foreach(l1. begin(), l1. end(), ::Print<T1>);
-    foreach(l1.rbegin(), l1.rend(), ::Print<T1>);
-}

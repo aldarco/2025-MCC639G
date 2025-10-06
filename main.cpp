@@ -34,6 +34,6 @@ int main(){
     // DemoVector();
     
     DemoLinkedList();
-    DemoDoubleLinkedList();
+    //DemoDoubleLinkedList();
     return 0;
 }
