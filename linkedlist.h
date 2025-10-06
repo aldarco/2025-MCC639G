@@ -175,6 +175,43 @@ std::ostream &operator<<(std::ostream &os, CLinkedList<Traits> &obj){
     return os;
 }
 
+// operador de asignacion
+template <typename Traits>
+CLinkedList<Traits>& CLinkedList<Traits>::operator=(const CLinkedList &other) {
+    if (this != &other) {  // previene autoasignacion
+        
+        while (m_pRoot != nullptr) {
+            Node* pTemp = m_pRoot;
+            m_pRoot = m_pRoot->GetNext();
+            delete pTemp;
+        }
+        m_nElem = 0;
+        
+        // copiar desde other / contr x copia
+        if (other.m_pRoot != nullptr) {
+            Node* pCurrentOther = other.m_pRoot;
+            Node* pLastNew = nullptr;
+            
+            m_pRoot = new Node(pCurrentOther->GetDataRef(), pCurrentOther->GetRef());
+            pLastNew = m_pRoot;
+            m_nElem++;
+            
+            pCurrentOther = pCurrentOther->GetNext();
+            
+            while (pCurrentOther != nullptr) {
+                Node* pNewNode = new Node(pCurrentOther->GetDataRef(), pCurrentOther->GetRef());
+                pLastNew->GetNextRef() = pNewNode;
+                pLastNew = pNewNode;
+                m_nElem++;
+                pCurrentOther = pCurrentOther->GetNext();
+            }
+        }
+        m_fCompare = other.m_fCompare;
+    }
+    return *this;  
+}
+
+
 void DemoLinkedList();
 
 #endif // __LINKEDLIST_H__
