@@ -73,7 +73,7 @@ public:
     // Constructor
     CLinkedList();
     CLinkedList(CLinkedList &other);
-
+    CLinkedList(const CLinkedList &other);
     // TODO: Done
     CLinkedList(CLinkedList &&other);
 
@@ -127,7 +127,29 @@ CLinkedList<Traits>::CLinkedList(){}
 // TODO Constructor por copia
 //      Hacer loop copiando cada elemento
 template <typename Traits>
-CLinkedList<Traits>::CLinkedList(CLinkedList &other){
+CLinkedList<Traits>::CLinkedList(CLinkedList &other)
+                    : m_pRoot(nullptr), m_nElem(0), m_fCompare(other.m_fCompare){
+    if (other.m_pRoot == nullptr){
+        return; // nothing to copy
+    }
+
+    Node* pCurrentOther = other.m_pRoot;
+    Node* pLastNew = nullptr;
+
+    // initialize: 1st nodo
+    m_pRoot = new Node(pCurrentOther->GetData(), pCurrentOther->GetRef());
+    pLastNew = m_pRoot;
+    m_nElem++;
+    pCurrentOther = pCurrentOther->GetNext();
+    // loop on the netxt
+    while (pCurrentOther != nullptr){
+        Node* pNewNode = new Node(pCurrentOther->GetData(), pCurrentOther->GetRef());
+        pLastNew->GetNextRef() = pNewNode;
+        pLastNew = pNewNode;
+        m_nElem++;
+        pCurrentOther = pCurrentOther->GetNext();
+    }
+
 }
 
 // Move Constructor
