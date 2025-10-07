@@ -203,6 +203,7 @@ ostream & operator<<(ostream &os, CBinaryTree<Traits> &obj){
     os << "CBinaryTree with " << obj.size() << " elements.";
     // Imprimir el larbo inorder
     // verificar no vacio
+    
     if (obj.size()>0)
         obj.inorder(os)
     else
